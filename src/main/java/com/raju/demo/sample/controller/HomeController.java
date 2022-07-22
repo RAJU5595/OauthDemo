@@ -17,41 +17,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/home")
 public class HomeController {
-
-    @GetMapping("/first")
-    @RolesAllowed({"user","admin"})
-    public String testOne(){
-        return "Hello World!";
-    }
-
-    @GetMapping("/second")
-    @RolesAllowed({"user","admin"})
-    public Integer testTwo(){
-        return 2022;
-    }
-
-    @PostMapping("/fourth")
-    @RolesAllowed({"user","admin"})
-    public ResponseEntity<String> testFour(){
-        return new ResponseEntity<>("Source created successfully",HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/fifth")
-    @RolesAllowed({"user","admin"})
-    public ResponseEntity<String> testFive(){
-        return new ResponseEntity<>("Source deleted successfully",HttpStatus.OK);
-    }
-
-    @GetMapping("/sixth")
-    @RolesAllowed({"user","admin"})
-    public ResponseEntity<String> testSix(@RequestHeader Map<String, String> headers){
-        String customHeader = headers.get("custom");
-        if(customHeader==null){
-            return  new ResponseEntity<>("You don't have authorization :( ",HttpStatus.FORBIDDEN);
-        }
-        return  new ResponseEntity<>("Source retrieved successfully",HttpStatus.OK);
-    }
-
     @GetMapping("/date")
     @RolesAllowed({"user","admin"})
     public ResponseEntity<?> getDate() throws URISyntaxException, IOException, InterruptedException {
@@ -68,7 +33,7 @@ public class HomeController {
     }
 
     @GetMapping("/weather")
-    @RolesAllowed("admin")
+    @RolesAllowed({"user","admin"})
     public ResponseEntity<?> getWeather() throws URISyntaxException, IOException, InterruptedException {
         String url = "http://api.weatherstack.com/current?access_key=1efaeb389c49f8dfb8003ebf3d954291&query=New%20York";
         HttpRequest request = HttpRequest.newBuilder()
