@@ -9,6 +9,8 @@ mvnw
 mvnw.cmd
 .DS_Store
 HELP.md
+.mvn/wrapper
+.DS_Store
 
 ### STS ###
 .apt_generated
