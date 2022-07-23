@@ -7,7 +7,7 @@ target/
 #Mac
 mvnw
 mvnw.cmd
-/readmefiles
+/src/main/resources/static/readmefiles
 .DS_Store
 HELP.md
 .mvn/wrapper
