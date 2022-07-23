@@ -3,16 +3,15 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-/src/main/resources/static/.gitkeep
-/src/main/resources/templates/.gitkeep
+
 #Mac
 mvnw
 mvnw.cmd
-/src/main/resources/static/readmefiles
 .DS_Store
-HELP.md
 .mvn/wrapper
-.DS_Store
+
+/src/main/resources/static/.gitkeep
+/src/main/resources/templates/.gitkeep
 
 
 ### STS ###
