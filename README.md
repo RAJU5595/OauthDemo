@@ -39,5 +39,5 @@ We can check that by using Postman Tool.
 
 ![](src/main/resources/static/readmefiles/postman.png)  
 
-Following are the end points exposed  
+Following are the end points given in the application. 
 ![](src/main/resources/static/readmefiles/endpoints.png)
