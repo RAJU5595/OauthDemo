@@ -10,10 +10,6 @@ mvnw.cmd
 .DS_Store
 .mvn/wrapper
 
-/src/main/resources/static/.gitkeep
-/src/main/resources/templates/.gitkeep
-
-
 ### STS ###
 .apt_generated
 .classpath

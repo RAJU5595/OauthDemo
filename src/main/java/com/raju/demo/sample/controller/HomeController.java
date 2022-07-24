@@ -19,7 +19,7 @@ import java.util.Map;
 public class HomeController {
     @GetMapping("/date")
     @RolesAllowed({"user","admin"})
-    public ResponseEntity<?> getDate() throws URISyntaxException, IOException, InterruptedException {
+    public ResponseEntity<Map<String,String>> getDate() throws URISyntaxException, IOException, InterruptedException {
         String url = "http://date.jsontest.com/";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(url))
@@ -34,7 +34,7 @@ public class HomeController {
 
     @GetMapping("/weather")
     @RolesAllowed({"user","admin"})
-    public ResponseEntity<?> getWeather() throws URISyntaxException, IOException, InterruptedException {
+    public ResponseEntity<Map<String,String>> getWeather() throws URISyntaxException, IOException, InterruptedException {
         String url = "http://api.weatherstack.com/current?access_key=1efaeb389c49f8dfb8003ebf3d954291&query=New%20York";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(url))
