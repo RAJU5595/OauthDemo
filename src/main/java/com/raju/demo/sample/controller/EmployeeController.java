@@ -25,7 +25,7 @@ public class EmployeeController {
 
     @GetMapping()
     @RolesAllowed("admin")
-    public ResponseEntity<List<Employee>> getEmployee(){
+    public ResponseEntity<List<Employee>> getEmployees(){
         return ResponseEntity.ok(employeeServiceImp.getAllEmployees());
     }
 
@@ -43,7 +43,7 @@ public class EmployeeController {
         oldEmployee.setName(updatedEmployee.getName());
         oldEmployee.setSalary(updatedEmployee.getSalary());
         employeeServiceImp.saveEmployee(oldEmployee);
-        return ResponseEntity.status(HttpStatus.OK).body("Employee Data Updated Successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("Employee with "+oldEmployee.getId()+" Data Updated Successfully");
     }
 
     @DeleteMapping("/{employeeId}")

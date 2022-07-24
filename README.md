@@ -1,12 +1,12 @@
 # Securing Spring Boot Application with Keycloak   
 
-In this project I created end points and secured with KeyCloak Open Source Identity and Access Management.
+In this project I created end points and secured with my application KeyCloak Open Source Identity and Access Management.
  
 ## How to Run and Install  
 
 Download and install Keycloak in the local machine.  
- * [Download Link](https://www.keycloak.org/downloads)
-
+ * [Download Link](https://www.keycloak.org/downloads)  
+ * To run keycloak follow these instructions https://www.keycloak.org/getting-started/getting-started-zip
 ### Important points to keep in mind :  
 
 1.Create admin account.  
