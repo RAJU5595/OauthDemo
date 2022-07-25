@@ -52,11 +52,15 @@ class HomeControllerTest {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
                 "/home/date");
         MvcResult result = (MvcResult) mockMvc.perform(requestBuilder).andReturn();
-        String expectedValue = "{\"date\":\"07-25-2022\",\"milliseconds_since_epoch\":\"\",\"time\":\"\"}";
-        assertNotEquals(expectedValue,result.getResponse().getContentAsString());
+        assertEquals(200,result.getResponse().getStatus());
     }
 
     @Test
-    void getWeather() {
+    @WithMockUser(roles = {"admin","user"})
+    void getWeather() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
+                "/home/weather");
+        MvcResult result = (MvcResult) mockMvc.perform(requestBuilder).andReturn();
+        assertEquals(200,result.getResponse().getStatus());
     }
 }
