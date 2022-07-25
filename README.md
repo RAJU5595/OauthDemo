@@ -17,10 +17,11 @@ Download and install Keycloak in the local machine.
 2.Create Realm for our application. 
  * https://www.keycloak.org/getting-started/getting-started-zip#_create_a_realm  
 
-3.Add Client to use Keycloak authourization server.  
+3.Add Client to use Keycloak authorization server.  
  * https://www.keycloak.org/getting-started/getting-started-zip#_secure_your_first_app  
 
-4.Create Roles.  
+4.Create Roles.   
+
 ![](src/main/resources/static/readmefiles/roles.png)  
 
 5.Create the Users and assign roles.  
@@ -35,9 +36,10 @@ To generate an access token for Keycloak users, we have to use openID Endpoint C
 
 We can check that by using Postman Tool.  
 
-**In Authorization we have to provide Access Token URL, Client ID , Scope ,Grant Type etc..**
+**In Authorization, we have to provide Access Token URL, Client ID , Scope ,Grant Type etc..**
 
 ![](src/main/resources/static/readmefiles/postman.png)  
 
-Following are the end points given in the application. 
+Following are the end points given in the application.  
+
 ![](src/main/resources/static/readmefiles/endpoints.png)
