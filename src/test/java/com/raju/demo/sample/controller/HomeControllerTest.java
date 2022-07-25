@@ -52,7 +52,8 @@ class HomeControllerTest {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
                 "/home/date");
         MvcResult result = (MvcResult) mockMvc.perform(requestBuilder).andReturn();
-        System.out.println(result.getResponse().getContentAsString());
+        String expectedValue = "{\"date\":\"07-25-2022\",\"milliseconds_since_epoch\":\"\",\"time\":\"\"}";
+        assertNotEquals(expectedValue,result.getResponse().getContentAsString());
     }
 
     @Test

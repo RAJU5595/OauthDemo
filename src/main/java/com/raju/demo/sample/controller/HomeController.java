@@ -28,7 +28,6 @@ public class HomeController {
         HttpClient client = HttpClient.newBuilder().build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println(response.body());
         Map<Object,Object> map = objectMapper.readValue(response.body(), Map.class);
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }
