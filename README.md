@@ -1,6 +1,6 @@
 # Securing Spring Boot Application with Keycloak   
 
-In this project I created spring boot application that consists several end points and secured my application KeyCloak Open Source Identity and Access Management.
+In this project I created spring boot application that consists several end points and secured my application with KeyCloak Open Source Identity and Access Management.
  
 ## How to Run and Install  
 
