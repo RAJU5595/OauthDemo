@@ -2,8 +2,6 @@ package com.raju.demo.sample.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.raju.demo.sample.entity.Employee;
-import com.raju.demo.sample.service.implementation.EmployeeServiceImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
