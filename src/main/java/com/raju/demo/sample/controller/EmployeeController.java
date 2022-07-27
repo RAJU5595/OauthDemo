@@ -1,7 +1,7 @@
 package com.raju.demo.sample.controller;
 
 import com.raju.demo.sample.entity.Employee;
-import com.raju.demo.sample.service.impl.EmployeeServiceImp;
+import com.raju.demo.sample.service.implementation.EmployeeServiceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

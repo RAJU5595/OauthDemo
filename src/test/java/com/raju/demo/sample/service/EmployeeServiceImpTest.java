@@ -2,7 +2,7 @@ package com.raju.demo.sample.service;
 
 import com.raju.demo.sample.entity.Employee;
 import com.raju.demo.sample.repository.EmployeeRepository;
-import com.raju.demo.sample.service.impl.EmployeeServiceImp;
+import com.raju.demo.sample.service.implementation.EmployeeServiceImp;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

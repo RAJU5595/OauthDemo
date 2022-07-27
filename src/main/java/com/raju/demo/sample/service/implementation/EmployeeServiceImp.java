@@ -1,4 +1,4 @@
-package com.raju.demo.sample.service.impl;
+package com.raju.demo.sample.service.implementation;
 
 import com.raju.demo.sample.entity.Employee;
 import com.raju.demo.sample.repository.EmployeeRepository;
