@@ -16,16 +16,8 @@ import javax.persistence.*;
 public class Backlog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "backlog_seq")
-    @GenericGenerator(
-            name = "backlog_seq",
-            strategy = "com.raju.demo.sample.idgenerator.CustomIdGenerator",
-            parameters = {
-                    @Parameter(name = CustomIdGenerator.INCREMENT_PARAM, value = "1"),
-                    @Parameter(name = CustomIdGenerator.VALUE_PREFIX_PARAMETER, value = "SUB_"),
-                    @Parameter(name = CustomIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
-
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
 

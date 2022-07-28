@@ -21,7 +21,6 @@ public class StudentController {
 
     @PostMapping()
     public ResponseEntity<?> saveStudent(@RequestBody ObjectNode jsonObject) throws Exception {
-        System.out.println(jsonObject);
         Student student = studentService.saveStudent(jsonObject);
         return ResponseEntity.status(HttpStatus.CREATED).body("Student details saved successfully with id :"+student.getId());
     }
@@ -30,5 +29,11 @@ public class StudentController {
     public Student getStudentDetails(@PathVariable String studentId) throws Exception {
         Student student = studentService.getStudentDetails(studentId);
         return student;
+    }
+
+    @PutMapping("/{studentId}")
+    public ResponseEntity<?> updateStudent(@PathVariable String studentId,@RequestBody ObjectNode jsonObject) throws Exception {
+        Student student = studentService.updateStudent(studentId,jsonObject);
+        return ResponseEntity.status(HttpStatus.OK).body("Student details updates successfully with id :"+student.getId());
     }
 }
