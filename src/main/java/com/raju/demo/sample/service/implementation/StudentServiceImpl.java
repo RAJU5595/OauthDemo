@@ -11,10 +11,7 @@ import com.raju.demo.sample.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service(value = "student_service")
 public class StudentServiceImpl implements StudentService {
@@ -34,10 +31,10 @@ public class StudentServiceImpl implements StudentService {
         Student student = new Student();
         student.setName(jsonObject.get("name").asText());
 
-        List<String> backlogs = new ArrayList<>();
+        Set<String> backlogs = new HashSet<>();
         jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
 
-        List<String> courses = new ArrayList<>();
+        Set<String> courses = new HashSet<>();
         jsonObject.get("courses").forEach(JsonNode -> courses.add(JsonNode.asText()));
 
         for (String subjectName : backlogs) {
@@ -89,25 +86,42 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<String> getBacklogs(String studentId) throws Exception {
+        Student student = this.getStudentDetails(studentId);
+        List <String> backlogs = new ArrayList<>();
+        for(Backlog backlog : student.getBacklogs()){
+            backlogs.add(backlog.getName());
+        }
+        return backlogs;
+    }
+
+    @Override
     public Student updateStudent(String studentId, ObjectNode jsonObject) throws Exception {
         Student existedStudent = this.getStudentDetails(studentId);
-        existedStudent.setId(studentId);
+       // System.out.println("Json Object: " + jsonObject);
         existedStudent.setName(jsonObject.get("name").asText());
-        existedStudent.getBacklogs().clear();
-        existedStudent.getCourses().clear();
-
-        List<String> backlogs = new ArrayList<>();
+        Set<String> backlogs = new HashSet<>();
         jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
-
-        List<String> courses = new ArrayList<>();
+        //System.out.println("Backlogs: " + backlogs);
+        Set<String> courses = new HashSet<>();
         jsonObject.get("courses").forEach(JsonNode -> courses.add(JsonNode.asText()));
 
-        for (String subjectName : backlogs) {
-            Backlog backlog = new Backlog();
-            backlog.setName(subjectName);
-            existedStudent.getBacklogs().add(backlog);
+        List<Backlog> newBacklogs = new ArrayList<>();
+        existedStudent.getBacklogs().clear();
+        for(String subject:backlogs){
+            if(!this.getBacklogs(studentId).contains(subject)){
+                Backlog backlog = new Backlog();
+                backlog.setName(subject);
+                newBacklogs.add(backlog);
+            }
+            else{
+                newBacklogs.addAll(backlogRepository.findAllBacklogs(studentId));
+            }
         }
 
+        existedStudent.setBacklogs(newBacklogs);
+
+        existedStudent.getCourses().clear();
         for (String courseName : courses) {
             if (!Objects.equals(courseName, "")) {
                 Course existedCourse = courseRepository.findCourseByName(courseName);
@@ -116,10 +130,18 @@ public class StudentServiceImpl implements StudentService {
                     course.setName(courseName);
                     existedStudent.getCourses().add(course);
                 }
+                else{
+                    existedStudent.getCourses().add(existedCourse);
+                }
             }
         }
 
         return studentRepository.save(existedStudent);
+    }
+
+    @Override
+    public void deleteStudent(String studentId) {
+        studentRepository.deleteById(studentId);
     }
 }
 

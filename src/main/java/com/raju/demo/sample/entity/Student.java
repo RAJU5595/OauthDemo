@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.*;
@@ -18,6 +20,7 @@ import static javax.persistence.CascadeType.*;
 @Table(name="student")
 @Setter
 @Getter
+@NoArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
@@ -33,8 +36,8 @@ public class Student {
 
     private String name;
 
-    @OneToMany(targetEntity = Backlog.class,cascade = ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id",referencedColumnName = "id")
+    @OneToMany(targetEntity = Backlog.class, cascade = ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
     private List<Backlog> backlogs = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = {DETACH, MERGE, PERSIST, REFRESH})

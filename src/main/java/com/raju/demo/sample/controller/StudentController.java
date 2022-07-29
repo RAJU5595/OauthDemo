@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
+@Validated
 public class StudentController {
 
     @Autowired
@@ -26,7 +30,7 @@ public class StudentController {
     }
 
     @GetMapping("/{studentId}")
-    public Student getStudentDetails(@PathVariable String studentId) throws Exception {
+    public Student getStudentDetails(@PathVariable @Size(max=9) String studentId) throws Exception {
         Student student = studentService.getStudentDetails(studentId);
         return student;
     }
@@ -35,5 +39,11 @@ public class StudentController {
     public ResponseEntity<?> updateStudent(@PathVariable String studentId,@RequestBody ObjectNode jsonObject) throws Exception {
         Student student = studentService.updateStudent(studentId,jsonObject);
         return ResponseEntity.status(HttpStatus.OK).body("Student details updates successfully with id :"+student.getId());
+    }
+
+    @DeleteMapping("/{studentId}")
+    public ResponseEntity<?> deleteStudent(@PathVariable String studentId){
+        studentService.deleteStudent(studentId);
+        return ResponseEntity.status(HttpStatus.OK).body("Student details updates successfully with id :"+studentId);
     }
 }
