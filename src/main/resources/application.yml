@@ -6,6 +6,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/sample
     driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: Raju@123
   jpa:
     show-sql: true
     hibernate:

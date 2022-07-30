@@ -31,19 +31,19 @@ public class StudentServiceImpl implements StudentService {
         Student student = new Student();
         student.setName(jsonObject.get("name").asText());
 
-        Set<String> backlogs = new HashSet<>();
-        jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
+//        Set<String> backlogs = new HashSet<>();
+//        jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
 
         Set<String> courses = new HashSet<>();
         jsonObject.get("courses").forEach(JsonNode -> courses.add(JsonNode.asText()));
 
-        for (String subjectName : backlogs) {
-            if (!Objects.equals(subjectName, "")) {
-                Backlog backlog = new Backlog();
-                backlog.setName(subjectName);
-                student.getBacklogs().add(backlog);
-            }
-        }
+//        for (String subjectName : backlogs) {
+//            if (!Objects.equals(subjectName, "")) {
+//                Backlog backlog = new Backlog();
+//                backlog.setName(subjectName);
+//                student.getBacklogs().add(backlog);
+//            }
+//        }
 
         for (String courseName : courses) {
             if (!Objects.equals(courseName, "")) {
@@ -86,40 +86,24 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<String> getBacklogs(String studentId) throws Exception {
-        Student student = this.getStudentDetails(studentId);
-        List <String> backlogs = new ArrayList<>();
-        for(Backlog backlog : student.getBacklogs()){
-            backlogs.add(backlog.getName());
-        }
-        return backlogs;
-    }
-
-    @Override
     public Student updateStudent(String studentId, ObjectNode jsonObject) throws Exception {
         Student existedStudent = this.getStudentDetails(studentId);
-       // System.out.println("Json Object: " + jsonObject);
         existedStudent.setName(jsonObject.get("name").asText());
         Set<String> backlogs = new HashSet<>();
         jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
-        //System.out.println("Backlogs: " + backlogs);
         Set<String> courses = new HashSet<>();
         jsonObject.get("courses").forEach(JsonNode -> courses.add(JsonNode.asText()));
 
-        List<Backlog> newBacklogs = new ArrayList<>();
-        existedStudent.getBacklogs().clear();
-        for(String subject:backlogs){
-            if(!this.getBacklogs(studentId).contains(subject)){
-                Backlog backlog = new Backlog();
-                backlog.setName(subject);
-                newBacklogs.add(backlog);
-            }
-            else{
-                newBacklogs.addAll(backlogRepository.findAllBacklogs(studentId));
-            }
-        }
-
-        existedStudent.setBacklogs(newBacklogs);
+//        for(Backlog backlog : existedStudent.getBacklogs()){
+//            backlogRepository.deleteById(backlog.getId());
+//        }
+//
+//        existedStudent.getBacklogs().clear();
+//        for(String subject : backlogs){
+//            Backlog backlog = new Backlog();
+//            backlog.setName(subject);
+//            existedStudent.getBacklogs().add(backlog);
+//        }
 
         existedStudent.getCourses().clear();
         for (String courseName : courses) {

@@ -11,8 +11,6 @@ public interface StudentService {
 
     public Student getStudentDetails(String studentId) throws Exception;
 
-    public List<String> getBacklogs(String studentId) throws Exception;
-
     public Student updateStudent(String studentId, ObjectNode jsonObject) throws Exception;
 
     public void deleteStudent(String studentId);

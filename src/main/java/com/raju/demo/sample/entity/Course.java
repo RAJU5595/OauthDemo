@@ -1,6 +1,7 @@
 package com.raju.demo.sample.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.raju.demo.sample.idgenerator.CustomIdGenerator;
 import lombok.*;
 import org.hibernate.annotations.*;
@@ -45,6 +46,6 @@ public class Course {
             inverseJoinColumns = {@JoinColumn(name="student_id")}
     )
 
-    @JsonIgnore
+    @JsonIgnoreProperties(value = "courses")
     private List<Student> students=new ArrayList<>();
 }

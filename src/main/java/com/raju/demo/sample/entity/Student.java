@@ -1,6 +1,7 @@
 package com.raju.demo.sample.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.raju.demo.sample.idgenerator.CustomIdGenerator;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -36,14 +37,18 @@ public class Student {
 
     private String name;
 
-    @OneToMany(targetEntity = Backlog.class, cascade = ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
-    private List<Backlog> backlogs = new ArrayList<>();
+//    @OneToMany(targetEntity = Backlog.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    @JoinColumn(name = "student_id")
+//    private List<Backlog> backlogs = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @JoinTable(name="student_course",
             joinColumns = {@JoinColumn(name="student_id")},
             inverseJoinColumns = {@JoinColumn(name="course_id")}
     )
+    @JsonIgnoreProperties(value = "students")
     private List<Course> courses = new ArrayList<>();
+
+    public Student(String id, String name) {
+    }
 }

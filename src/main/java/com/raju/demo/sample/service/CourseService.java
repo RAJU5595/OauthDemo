@@ -8,8 +8,6 @@ import java.util.Optional;
 
 public interface CourseService {
 
-    public List<String> getAllStudentsOfTheCourse(String courseId) throws Exception;
-
     public Course getCourseDetails(String courseId) throws Exception;
 
 }

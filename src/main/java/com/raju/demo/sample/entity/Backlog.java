@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -23,5 +24,8 @@ public class Backlog {
 
     public Backlog(String name) {
         this.name = name;
+    }
+
+    public Backlog(int id, String subject) {
     }
 }

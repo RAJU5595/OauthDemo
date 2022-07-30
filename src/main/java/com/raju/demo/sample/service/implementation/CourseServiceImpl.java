@@ -18,27 +18,6 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepository courseRepository;
 
     @Override
-    public List<String> getAllStudentsOfTheCourse(String courseId) throws Exception {
-
-        Optional<Course> result = courseRepository.findById(courseId);
-        Course course;
-
-        if(result.isPresent()){
-            course = result.get();
-        }
-        else{
-            throw new Exception("There is no course with the given Id :"+courseId);
-        }
-
-        List<String> registeredStudentsNames = new ArrayList<>();
-        for(Student student : course.getStudents()){
-            registeredStudentsNames.add(student.getName());
-        }
-
-        return registeredStudentsNames;
-    }
-
-    @Override
     public Course getCourseDetails(String courseId) throws Exception {
         Optional<Course> result = courseRepository.findById(courseId);
 

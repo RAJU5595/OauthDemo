@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -16,13 +17,8 @@ public class CourseController {
     @Qualifier("course_service")
     private CourseService courseService;
 
-    @GetMapping("/{courseId}/students")
-    public List<String> getAllTheStudentsOfTheCourse(@PathVariable String courseId) throws Exception {
-        List<String> registeredStudents = courseService.getAllStudentsOfTheCourse(courseId);
-        return registeredStudents;
-    }
-
     @GetMapping("/{courseId}")
+    @RolesAllowed({"user","admin"})
     public Course getTheCourseDetails(@PathVariable String courseId) throws Exception {
         Course course = courseService.getCourseDetails(courseId);
         return course;

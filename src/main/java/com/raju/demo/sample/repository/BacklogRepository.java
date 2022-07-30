@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface BacklogRepository extends JpaRepository<Backlog,String> {
+public interface BacklogRepository extends JpaRepository<Backlog,Integer> {
     Backlog findSubjectByName(String subjectName);
 
     @Query(value = "select * from backlog where student_id=?1",nativeQuery = true)
