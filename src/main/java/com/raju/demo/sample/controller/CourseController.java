@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class CourseController {
 
     @GetMapping("/{courseId}")
     @RolesAllowed({"user","admin"})
-    public Course getTheCourseDetails(@PathVariable String courseId) throws Exception {
+    public Course getTheCourseDetails(@PathVariable @Pattern(regexp = "^COU_\\d{5}$") String courseId) throws Exception {
         Course course = courseService.getCourseDetails(courseId);
         return course;
     }

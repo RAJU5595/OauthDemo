@@ -34,20 +34,19 @@ public class StudentController {
     @GetMapping("/{studentId}")
     @RolesAllowed({"user","admin"})
     public Student getStudentDetails(@PathVariable @Pattern(regexp = "^STU_\\d{5}$") String studentId) throws Exception {
-        Student student = studentService.getStudentDetails(studentId);
-        return student;
+        return studentService.getStudentDetails(studentId);
     }
 
     @PutMapping("/{studentId}")
     @RolesAllowed({"admin"})
-    public ResponseEntity<?> updateStudent(@PathVariable String studentId,@RequestBody ObjectNode jsonObject) throws Exception {
+    public ResponseEntity<?> updateStudent(@PathVariable @Pattern(regexp = "^STU_\\d{5}$") String studentId,@RequestBody ObjectNode jsonObject) throws Exception {
         Student student = studentService.updateStudent(studentId,jsonObject);
         return ResponseEntity.status(HttpStatus.OK).body("Student details updates successfully with id :"+student.getId());
     }
 
     @DeleteMapping("/{studentId}")
     @RolesAllowed({"admin"})
-    public ResponseEntity<?> deleteStudent(@PathVariable String studentId){
+    public ResponseEntity<?> deleteStudent(@PathVariable @Pattern(regexp = "^STU_\\d{5}$") String studentId){
         studentService.deleteStudent(studentId);
         return ResponseEntity.status(HttpStatus.OK).body("Student details updates successfully with id :"+studentId);
     }
