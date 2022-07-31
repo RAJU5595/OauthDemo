@@ -30,20 +30,8 @@ public class StudentServiceImpl implements StudentService {
 
         Student student = new Student();
         student.setName(jsonObject.get("name").asText());
-
-//        Set<String> backlogs = new HashSet<>();
-//        jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
-
         Set<String> courses = new HashSet<>();
         jsonObject.get("courses").forEach(JsonNode -> courses.add(JsonNode.asText()));
-
-//        for (String subjectName : backlogs) {
-//            if (!Objects.equals(subjectName, "")) {
-//                Backlog backlog = new Backlog();
-//                backlog.setName(subjectName);
-//                student.getBacklogs().add(backlog);
-//            }
-//        }
 
         for (String courseName : courses) {
             if (!Objects.equals(courseName, "")) {
@@ -93,17 +81,6 @@ public class StudentServiceImpl implements StudentService {
         jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
         Set<String> courses = new HashSet<>();
         jsonObject.get("courses").forEach(JsonNode -> courses.add(JsonNode.asText()));
-
-//        for(Backlog backlog : existedStudent.getBacklogs()){
-//            backlogRepository.deleteById(backlog.getId());
-//        }
-//
-//        existedStudent.getBacklogs().clear();
-//        for(String subject : backlogs){
-//            Backlog backlog = new Backlog();
-//            backlog.setName(subject);
-//            existedStudent.getBacklogs().add(backlog);
-//        }
 
         existedStudent.getCourses().clear();
         for (String courseName : courses) {

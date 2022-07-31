@@ -37,10 +37,6 @@ public class Student {
 
     private String name;
 
-//    @OneToMany(targetEntity = Backlog.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-//    @JoinColumn(name = "student_id")
-//    private List<Backlog> backlogs = new ArrayList<>();
-
     @ManyToMany(fetch = FetchType.LAZY,cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @JoinTable(name="student_course",
             joinColumns = {@JoinColumn(name="student_id")},

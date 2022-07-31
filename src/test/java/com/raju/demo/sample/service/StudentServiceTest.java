@@ -2,6 +2,7 @@ package com.raju.demo.sample.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.raju.demo.sample.entity.Course;
 import com.raju.demo.sample.entity.Student;
@@ -24,36 +25,27 @@ class StudentServiceTest {
     @MockBean
     private StudentRepository studentRepository;
 
-    @MockBean
-    private CourseRepository courseRepository;
-
     @Autowired
     private StudentServiceImpl studentService;
 
-    @Autowired
-    ObjectMapper objectMapper;
-
-
     @Test
     void saveStudent() throws Exception {
-        ObjectNode jsonObject = objectMapper.createObjectNode();
-        jsonObject.put("name","raju");
-        jsonObject.put("courses","frontend,backend");
-        jsonObject.put("backlogs","maths,physics");
+    }
+
+    @Test
+    void getStudentDetails() throws Exception {
         Student student = new Student("1","name");
-        Set<String> courses = new HashSet<>();
-        when(studentRepository.save(student)).thenReturn(student);
-        when(studentRepository.findStudentByName(student.getName())).thenReturn(student);
-        when(courseRepository.findCourseByName("")).thenReturn(new Course());
-        assertEquals(student,studentService.saveStudent(jsonObject));
+        when(studentRepository.findById("1")).thenReturn(Optional.of(student));
+        assertEquals(student,studentService.getStudentDetails("1"));
     }
 
     @Test
-    void getStudentDetails() {
-    }
-
-    @Test
-    void getBacklogs() {
+    void test_getStudentDetails_studentNotFoundException(){
+        Student student = new Student("1","name");
+        when(studentRepository.findById("1")).thenReturn(Optional.of(student));
+        assertThrows(Exception.class,()->{
+            studentService.getStudentDetails("2");
+        });
     }
 
     @Test
@@ -62,5 +54,8 @@ class StudentServiceTest {
 
     @Test
     void deleteStudent() {
+        Student student = new Student("1","name");
+        studentService.deleteStudent(student.getId());
+        verify(studentRepository,times(1)).deleteById(student.getId());
     }
 }

@@ -48,4 +48,7 @@ public class Course {
 
     @JsonIgnoreProperties(value = "courses")
     private List<Student> students=new ArrayList<>();
+
+    public Course(String id,String name){
+    }
 }
