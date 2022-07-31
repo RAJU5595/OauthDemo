@@ -1,14 +1,10 @@
 package com.raju.demo.sample.service.implementation;
 
 import com.raju.demo.sample.entity.Course;
-import com.raju.demo.sample.entity.Student;
 import com.raju.demo.sample.repository.CourseRepository;
 import com.raju.demo.sample.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service(value = "course_service")
