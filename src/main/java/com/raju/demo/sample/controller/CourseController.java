@@ -21,7 +21,12 @@ public class CourseController {
     @GetMapping("/{courseId}")
     @RolesAllowed({"user","admin"})
     public Course getTheCourseDetails(@PathVariable @Pattern(regexp = "^COU_\\d{5}$") String courseId) throws Exception {
-        Course course = courseService.getCourseDetails(courseId);
-        return course;
+        return courseService.getCourseDetails(courseId);
+    }
+
+    @GetMapping()
+    @RolesAllowed({"admin"})
+    public List<Course> getAllTheCourseDetails(){
+        return courseService.getAllTheCourses();
     }
 }

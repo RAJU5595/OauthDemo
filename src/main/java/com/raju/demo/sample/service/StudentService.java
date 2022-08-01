@@ -14,4 +14,6 @@ public interface StudentService {
     public Student updateStudent(String studentId, ObjectNode jsonObject) throws Exception;
 
     public void deleteStudent(String studentId);
+
+    public List<Student> getAllTheStudentDetails();
 }

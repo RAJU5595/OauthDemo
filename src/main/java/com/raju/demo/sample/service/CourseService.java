@@ -10,4 +10,6 @@ public interface CourseService {
 
     public Course getCourseDetails(String courseId) throws Exception;
 
+    public List<Course> getAllTheCourses();
+
 }

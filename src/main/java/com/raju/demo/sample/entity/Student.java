@@ -22,6 +22,7 @@ import static javax.persistence.CascadeType.*;
 @Setter
 @Getter
 @NoArgsConstructor
+@ToString
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
@@ -46,5 +47,7 @@ public class Student {
     private List<Course> courses = new ArrayList<>();
 
     public Student(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -49,5 +50,11 @@ public class StudentController {
     public ResponseEntity<?> deleteStudent(@PathVariable @Pattern(regexp = "^STU_\\d{5}$") String studentId){
         studentService.deleteStudent(studentId);
         return ResponseEntity.status(HttpStatus.OK).body("Student details updates successfully with id :"+studentId);
+    }
+
+    @GetMapping()
+    @RolesAllowed({"admin"})
+    public List<Student> getAllStudents(){
+        return studentService.getAllTheStudentDetails();
     }
 }

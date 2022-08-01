@@ -1,10 +1,8 @@
 package com.raju.demo.sample.service.implementation;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.raju.demo.sample.entity.Backlog;
 import com.raju.demo.sample.entity.Course;
 import com.raju.demo.sample.entity.Student;
-import com.raju.demo.sample.repository.BacklogRepository;
 import com.raju.demo.sample.repository.CourseRepository;
 import com.raju.demo.sample.repository.StudentRepository;
 import com.raju.demo.sample.service.StudentService;
@@ -12,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service(value = "student_service")
 public class StudentServiceImpl implements StudentService {
@@ -22,8 +22,6 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private CourseRepository courseRepository;
 
-    @Autowired
-    private BacklogRepository backlogRepository;
 
     @Override
     public Student saveStudent(ObjectNode jsonObject) throws Exception {
@@ -103,6 +101,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteStudent(String studentId) {
         studentRepository.deleteById(studentId);
+    }
+
+    @Override
+    public List<Student> getAllTheStudentDetails() {
+        return studentRepository.findAll();
     }
 }
 
