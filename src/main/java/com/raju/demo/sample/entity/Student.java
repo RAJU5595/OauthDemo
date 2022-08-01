@@ -22,7 +22,6 @@ import static javax.persistence.CascadeType.*;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")

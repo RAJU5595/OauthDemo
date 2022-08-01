@@ -36,10 +36,6 @@ public class Course {
 
     private String name;
 
-    public Course(String name){
-        this.name = name;
-    }
-
     @ManyToMany(fetch = FetchType.LAZY,cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @JoinTable(name="student_course",
             joinColumns = {@JoinColumn(name="course_id")},

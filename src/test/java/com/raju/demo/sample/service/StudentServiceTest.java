@@ -58,4 +58,13 @@ class StudentServiceTest {
         studentService.deleteStudent(student.getId());
         verify(studentRepository,times(1)).deleteById(student.getId());
     }
+
+    @Test
+    void getAllStudents(){
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("1","a"));
+        students.add(new Student("2","b"));
+        when(studentRepository.findAll()).thenReturn(students);
+        assertEquals(students,studentService.getAllTheStudentDetails());
+    }
 }
