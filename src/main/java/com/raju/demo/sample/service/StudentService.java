@@ -16,4 +16,6 @@ public interface StudentService {
     public void deleteStudent(String studentId);
 
     public List<Student> getAllTheStudentDetails();
+
+    public List<Student> getAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(Integer count);
 }

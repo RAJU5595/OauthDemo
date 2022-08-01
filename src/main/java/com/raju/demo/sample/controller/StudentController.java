@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
@@ -54,7 +52,11 @@ public class StudentController {
 
     @GetMapping()
     @RolesAllowed({"admin"})
-    public List<Student> getAllStudents(){
-        return studentService.getAllTheStudentDetails();
+    public List<Student> getAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(@RequestParam(value = "courseLimit",required = false) Integer courseLimit){
+        if(courseLimit==null){
+            return studentService.getAllTheStudentDetails();
+        }
+        return studentService.getAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(courseLimit);
     }
+
 }

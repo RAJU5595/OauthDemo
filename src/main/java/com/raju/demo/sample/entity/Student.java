@@ -19,8 +19,8 @@ import static javax.persistence.CascadeType.*;
 
 @Entity
 @Table(name="student")
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 public class Student {
     @Id

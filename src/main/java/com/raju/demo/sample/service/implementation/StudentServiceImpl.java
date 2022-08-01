@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service(value = "student_service")
 public class StudentServiceImpl implements StudentService {
@@ -106,6 +104,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllTheStudentDetails() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public List<Student> getAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(Integer count) {
+        return studentRepository.findAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(count);
     }
 }
 

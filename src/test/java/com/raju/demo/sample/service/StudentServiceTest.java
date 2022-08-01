@@ -30,6 +30,7 @@ class StudentServiceTest {
 
     @Test
     void saveStudent() throws Exception {
+
     }
 
     @Test
@@ -66,5 +67,14 @@ class StudentServiceTest {
         students.add(new Student("2","b"));
         when(studentRepository.findAll()).thenReturn(students);
         assertEquals(students,studentService.getAllTheStudentDetails());
+    }
+
+    @Test
+    void getAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses() {
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("1","a"));
+        students.add(new Student("2","b"));
+        when(studentRepository.findAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(2)).thenReturn(students);
+        assertEquals(students,studentService.getAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(2));
     }
 }
