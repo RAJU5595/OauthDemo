@@ -9,6 +9,7 @@ import com.raju.demo.sample.entity.Student;
 import com.raju.demo.sample.repository.CourseRepository;
 import com.raju.demo.sample.repository.StudentRepository;
 import com.raju.demo.sample.service.implementation.StudentServiceImpl;
+import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,15 +23,25 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class StudentServiceTest {
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     @MockBean
     private StudentRepository studentRepository;
+
+    @MockBean
+    private CourseRepository courseRepository;
 
     @Autowired
     private StudentServiceImpl studentService;
 
     @Test
     void saveStudent() throws Exception {
-
+        Student student = new Student("1","a");
+        ObjectNode jsonObject = objectMapper.convertValue(student, ObjectNode.class);
+        when(studentRepository.save(student)).thenReturn(student);
+        when(studentRepository.findStudentByName("a")).thenReturn(null);
+        System.out.println(studentService.saveStudent(jsonObject));
     }
 
     @Test

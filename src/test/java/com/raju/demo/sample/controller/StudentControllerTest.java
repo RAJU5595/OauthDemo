@@ -1,5 +1,7 @@
 package com.raju.demo.sample.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.raju.demo.sample.entity.Student;
 import com.raju.demo.sample.service.StudentService;
 import com.raju.demo.sample.service.implementation.StudentServiceImpl;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -33,6 +36,9 @@ class StudentControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
+    ObjectMapper objectMapper;
+
+    @Autowired
     private WebApplicationContext context;
 
     @BeforeEach
@@ -43,10 +49,6 @@ class StudentControllerTest {
     @MockBean
     @Qualifier("student_service")
     private StudentService studentService;
-
-    @Test
-    void saveStudent() {
-    }
 
     @Test
     @WithMockUser(roles = {"admin","user"})
@@ -66,10 +68,6 @@ class StudentControllerTest {
                 "/student/1");
         MvcResult result = (MvcResult) mockMvc.perform(requestBuilder).andReturn();
         assertEquals(400,result.getResponse().getStatus());
-    }
-
-    @Test
-    void updateStudent() {
     }
 
     @Test
@@ -117,6 +115,32 @@ class StudentControllerTest {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
                 "/student");
         when(studentService.getAllTheStudentDetails()).thenReturn(students);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        assertEquals(200,result.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser(roles = {"admin"})
+    void testSaveStudent() throws Exception {
+        Student student = new Student("1","a");
+        ObjectNode jsonObject = objectMapper.convertValue(student, ObjectNode.class);
+        when(studentService.saveStudent(jsonObject)).thenReturn(student);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(
+                "/student").accept(MediaType.APPLICATION_JSON).content(jsonObject.toString())
+                .contentType(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        assertEquals(201,result.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser(roles = {"admin"})
+    void testUpdateStudent() throws Exception {
+        Student student = new Student("1","a");
+        ObjectNode jsonObject = objectMapper.convertValue(student, ObjectNode.class);
+        when(studentService.updateStudent("STU_00001",jsonObject)).thenReturn(student);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.put(
+                        "/student/STU_00001").accept(MediaType.APPLICATION_JSON).content(jsonObject.toString())
+                .contentType(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         assertEquals(200,result.getResponse().getStatus());
     }
