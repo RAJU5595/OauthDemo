@@ -63,7 +63,12 @@ class StudentServiceTest {
     }
 
     @Test
-    void updateStudent() {
+    void updateStudent() throws Exception {
+        Student student = new Student("1","a");
+        ObjectNode jsonObject = objectMapper.convertValue(student, ObjectNode.class);
+        when(studentRepository.findById("1")).thenReturn(Optional.of(student));
+        when(studentRepository.save(student)).thenReturn(student);
+        assertEquals(student,studentService.updateStudent("1",jsonObject));
     }
 
     @Test
