@@ -36,12 +36,14 @@ class StudentServiceTest {
     private StudentServiceImpl studentService;
 
     @Test
-    void saveStudent() throws Exception {
+    void saveStudentExistedNameException() throws Exception {
         Student student = new Student("1","a");
         ObjectNode jsonObject = objectMapper.convertValue(student, ObjectNode.class);
         when(studentRepository.save(student)).thenReturn(student);
-        when(studentRepository.findStudentByName("a")).thenReturn(null);
-        System.out.println(studentService.saveStudent(jsonObject));
+        when(studentRepository.findStudentByName(student.getName())).thenReturn(student);
+        assertThrows(Exception.class,()->{
+            studentService.saveStudent(jsonObject);
+        });
     }
 
     @Test
@@ -87,5 +89,14 @@ class StudentServiceTest {
         students.add(new Student("2","b"));
         when(studentRepository.findAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(2)).thenReturn(students);
         assertEquals(students,studentService.getAllStudentsWhoEnrolledInMoreThanGivenNoOfCourses(2));
+    }
+
+    @Test
+    void saveStudent() throws Exception {
+        Student student = new Student("1","a");
+        ObjectNode jsonObject = objectMapper.convertValue(student, ObjectNode.class);
+        when(studentRepository.save(student)).thenReturn(student);
+        when(studentRepository.findStudentByName(student.getName())).thenReturn(null);
+        System.out.println(studentService.saveStudent(jsonObject));
     }
 }

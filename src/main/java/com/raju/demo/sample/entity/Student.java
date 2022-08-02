@@ -28,9 +28,7 @@ public class Student {
                     @Parameter(name = CustomIdGenerator.INCREMENT_PARAM, value = "1"),
                     @Parameter(name = CustomIdGenerator.VALUE_PREFIX_PARAMETER, value = "STU_"),
                     @Parameter(name = CustomIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
-
     private String id;
-
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = {DETACH, MERGE, PERSIST, REFRESH})
