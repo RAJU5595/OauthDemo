@@ -38,7 +38,7 @@ We can check that by using Postman Tool.
 
 **In Authorization, we have to provide Access Token URL, Client ID , Scope ,Grant Type etc..**
 
-![](src/main/resources/static/readmefiles/postman.png)  
+![](src/main/resources/static/readmefiles/postman.png)   
 
 Following are the end points given in the application.  
 
