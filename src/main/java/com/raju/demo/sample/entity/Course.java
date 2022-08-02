@@ -1,6 +1,5 @@
 package com.raju.demo.sample.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.raju.demo.sample.idgenerator.CustomIdGenerator;
 import lombok.*;

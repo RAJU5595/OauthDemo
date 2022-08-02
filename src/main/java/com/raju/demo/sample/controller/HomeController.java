@@ -22,7 +22,7 @@ public class HomeController {
 
     @GetMapping("/weather")
     @RolesAllowed({"user","admin"})
-    public ObjectNode getWeather(@RequestParam(value = "city",defaultValue = "Bangalore") String city) throws Exception {
+    public ObjectNode getWeather(@RequestParam(value = "city",required = false,defaultValue = "Bangalore") String city) throws Exception {
         return homeService.getWeatherDetails(city);
     }
 
