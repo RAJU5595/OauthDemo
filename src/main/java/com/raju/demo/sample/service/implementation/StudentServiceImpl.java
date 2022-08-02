@@ -73,8 +73,8 @@ public class StudentServiceImpl implements StudentService {
     public Student updateStudent(String studentId, ObjectNode jsonObject) throws Exception {
         Student existedStudent = this.getStudentDetails(studentId);
         existedStudent.setName(jsonObject.get("name").asText());
-        Set<String> backlogs = new HashSet<>();
-        jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
+//        Set<String> backlogs = new HashSet<>();
+//        jsonObject.get("backlogs").forEach(JsonNode -> backlogs.add(JsonNode.asText()));
         Set<String> courses = new HashSet<>();
         jsonObject.get("courses").forEach(JsonNode -> courses.add(JsonNode.asText()));
 
