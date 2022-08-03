@@ -42,4 +42,8 @@ We can check that by using Postman Tool.
 
 Following are the end points given in the application.  
 
-![](src/main/resources/static/readmefiles/endpoints.png)   
+![](src/main/resources/static/readmefiles/endpoints.png)  
+
+Testing coverage report
+
+![](src/main/resources/static/readmefiles/testing%20coverage.png)
