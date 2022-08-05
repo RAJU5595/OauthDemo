@@ -7,11 +7,14 @@ import com.raju.demo.sample.repository.CourseRepository;
 import com.raju.demo.sample.repository.StudentRepository;
 import com.raju.demo.sample.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service(value = "student_service")
+@PropertySource("classpath:messeges.properties")
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
@@ -19,6 +22,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private CourseRepository courseRepository;
+
+    @Value("student_exist_error_msg")
+    private String studentExistErrorMsg;
+
+    @Value("student_not_exist_error_msg")
+    private String studentNotExistErrorMsg;
 
 
     @Override
@@ -48,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
         if (existedStudent == null) {
             newStudent = studentRepository.save(student);
         } else {
-            throw new Exception("Student name already Existed in the Database");
+            throw new Exception(studentExistErrorMsg);
         }
 
         return newStudent;
@@ -63,7 +72,7 @@ public class StudentServiceImpl implements StudentService {
         if (result.isPresent()) {
             student = result.get();
         } else {
-            throw new Exception("There is no student with the given Id :" + studentId);
+            throw new Exception(studentNotExistErrorMsg + studentId);
         }
 
         return student;

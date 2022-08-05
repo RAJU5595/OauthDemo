@@ -15,7 +15,7 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 @Validated
 public class StudentController {
 
@@ -47,7 +47,7 @@ public class StudentController {
     @RolesAllowed({"admin"})
     public ResponseEntity<?> deleteStudent(@PathVariable @Pattern(regexp = "^STU_\\d{5}$") String studentId){
         studentService.deleteStudent(studentId);
-        return ResponseEntity.status(HttpStatus.OK).body("Student details updates successfully with id :"+studentId);
+        return ResponseEntity.status(HttpStatus.OK).body("Student details deletes successfully with id :"+studentId);
     }
 
     @GetMapping()

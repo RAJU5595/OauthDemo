@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/courses")
 @Validated
 public class CourseController {
 

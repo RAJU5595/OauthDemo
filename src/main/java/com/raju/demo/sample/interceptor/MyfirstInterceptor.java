@@ -3,6 +3,8 @@ package com.raju.demo.sample.interceptor;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpRequest;
+import org.apache.http.impl.client.RequestWrapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,18 +19,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class MyfirstInterceptor implements HandlerInterceptor {
 
     private RestTemplate restTemplate = new RestTemplate();
-
-    private String getBase64Credentials(){
-        String plainCreds = "raju" + ":" + "raju";
-        byte[] plainCredsBytes = plainCreds.getBytes();
-        byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
-        return new String(base64CredsBytes);
-    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -44,7 +40,7 @@ public class MyfirstInterceptor implements HandlerInterceptor {
 
         HttpEntity<MultiValueMap<String, String>> tokenrequest = new HttpEntity<MultiValueMap<String, String>>(map,headers);
         ResponseEntity<ObjectNode> result = restTemplate.postForEntity( tokenEndpoint, tokenrequest , ObjectNode.class );
-        response.addHeader("Authorization","Bearer "+result.getBody().get("access_token").asText());
+        System.out.println(result.getBody());
         return true;
     }
 }

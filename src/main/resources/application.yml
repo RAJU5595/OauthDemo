@@ -26,3 +26,4 @@ date:
 
 weather:
   api: http://api.weatherstack.com/current?access_key=1efaeb389c49f8dfb8003ebf3d954291&query=
+

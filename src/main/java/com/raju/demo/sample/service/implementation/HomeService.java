@@ -2,11 +2,13 @@ package com.raju.demo.sample.service.implementation;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@PropertySource("classpath:messeges.properties")
 public class HomeService {
 
     private RestTemplate restTemplate = new RestTemplate();
@@ -17,6 +19,14 @@ public class HomeService {
     @Value("${weather.api}")
     private String weatherAPI;
 
+    @Value("${dateAPI_errorMsg}")
+    private String dateApiErrorMsg;
+
+    @Value("${weatherAPI_errorMsg}")
+    private String weatherApiErrorMsg;
+
+
+
     public ObjectNode getTheDate() throws Exception {
         try{
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(dateAPI,ObjectNode.class);
@@ -24,7 +34,7 @@ public class HomeService {
             return jsonObject;
         }
         catch (Exception e){
-            throw new Exception("Something went wrong while calling the Date API");
+            throw new Exception(dateApiErrorMsg);
         }
     }
 
@@ -37,7 +47,7 @@ public class HomeService {
             return jsonObject;
         }
         catch (Exception e){
-            throw new Exception("Something went wrong while calling the Weather API");
+            throw new Exception(weatherApiErrorMsg);
         }
     }
 }
